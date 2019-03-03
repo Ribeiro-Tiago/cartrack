@@ -20,11 +20,20 @@
 .card .body .item-group {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	padding: 0 .5vh;
 }
 
+.card .body .item-group img {
+	width: 48px;
+	height: 48px;
+}
 
-.card .body .label {
-	font-weight: bold;
+.card .body .item-group div {
+	width: 80%;
+	display: flex;
+	align-items: flex-end;
+	flex-direction: column;
 }
 
 .card .body p {
@@ -39,7 +48,6 @@
 }
 
 .card .footer {
-	height: 50px;
 	border-top: solid 1px #000;
 	margin-top: 2vh;
 	display: flex;

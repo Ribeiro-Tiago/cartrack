@@ -4,11 +4,14 @@ import PropTypes from 'prop-types'
 import "./UserItem.css";
 
 export default class UserItem extends React.Component {
-    renderItem(label, value) {
+    renderSection(imgName, altText, texts) {
         return (
             <div className="item-group">
-                <p className="label">{label}</p>
-                <p>{value}</p>
+                <img src={require(`../../assets/images/${imgName}.png`)} alt={altText} />
+
+                <div>
+                    {texts.map((text, index) => <p key={index}>{text}</p>)}
+                </div>
             </div>
         )
     }
@@ -21,22 +24,26 @@ export default class UserItem extends React.Component {
                 </div>
 
                 <div className="body">
-                    <section>
-                        {this.renderItem("Username", this.props.user.username)}
-                        {this.renderItem("Email", this.props.user.email)}
-                        {this.renderItem("Website", this.props.user.website)}
-                    </section>
+                    {this.renderSection("user", "User Info", [
+                        this.props.user.username,
+                        this.props.user.email,
+                        this.props.user.website
+                    ])}
+
                     <hr />
-                    <section>
-                        {this.renderItem("Address", `${this.props.user.address.street} ${this.props.user.address.suite}`)}
-                        {this.renderItem("", `${this.props.user.address.zipcode}, ${this.props.user.address.city}`)}
-                    </section>
+
+                    {this.renderSection("home", "Home info", [
+                        `${this.props.user.address.street} ${this.props.user.address.suite}`,
+                        `${this.props.user.address.zipcode}, ${this.props.user.address.city}`
+                    ])}
+
                     <hr />
-                    <section>
-                        {this.renderItem("Company", this.props.user.company.name)}
-                        {this.renderItem("", this.props.user.company.bs)}
-                        {this.renderItem("", `"${this.props.user.company.catchPhrase}"`)}
-                    </section>
+
+                    {this.renderSection("team", "Company info", [
+                        this.props.user.company.name,
+                        this.props.user.company.bs,
+                        `"${this.props.user.company.catchPhrase}"`
+                    ])}
                 </div>
 
                 <div className="footer">
