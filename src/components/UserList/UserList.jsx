@@ -23,8 +23,6 @@ class UserList extends React.Component {
     fetchUsers() {
         api.fetch("https://jsonplaceholder.typicode.com/users")
             .then(result => {
-
-
                 this.props.setUsers(result);
 
                 this.toggleLoading();
@@ -39,13 +37,11 @@ class UserList extends React.Component {
     }
 
     render() {
-        if (this.state.isLoading) {
-            return (<Loader />);
-        }
-
         return (
-            <div className="list-wrapper">
+            <div className="content" >
                 {this.props.users.map(u => <UserItem key={u.id} user={u} />)}
+
+                {this.state.isLoading && <Loader />}
             </div>
         );
     }
