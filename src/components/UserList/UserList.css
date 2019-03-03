@@ -35,6 +35,7 @@
 	border-bottom-right-radius: 9px;
 	background: #20232a;
 	align-items: center;
+	user-select: none;
 }
 
 .search-container span:hover {

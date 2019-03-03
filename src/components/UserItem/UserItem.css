@@ -63,9 +63,11 @@
 	cursor: pointer;
 	user-select: none;
 	align-self: center;
+	transition: .2s;
 }
 
 .footer span:hover {
 	background: green;
 	color: #fff;
+	transition: .2s;
 }
