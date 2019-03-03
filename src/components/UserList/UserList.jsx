@@ -5,6 +5,7 @@ import "./UserList.css";
 import api from '../../services/Api';
 import Loader from "../Loader/Loader";
 import { SET_USER } from "../../actions/user";
+import UserItem from '../UserItem/UserItem';
 
 class UserList extends React.Component {
     constructor(props) {
@@ -43,10 +44,8 @@ class UserList extends React.Component {
         }
 
         return (
-            <div>
-                <ul>
-                    {this.props.users.map(u => <li>{u.name}</li>)}
-                </ul>
+            <div className="list-wrapper">
+                {this.props.users.map(u => <UserItem key={u.id} user={u} />)}
             </div>
         );
     }
