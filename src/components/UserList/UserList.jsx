@@ -8,8 +8,12 @@ import { SET_USER } from "../../actions/user";
 import UserItem from '../UserItem/UserItem';
 
 class UserList extends React.Component {
+    filterRef;
+
     constructor(props) {
         super(props);
+
+        this.filterRef = React.createRef();
 
         this.state = {
             isLoading: true
@@ -36,12 +40,32 @@ class UserList extends React.Component {
         }));
     }
 
+    onFilterClick = () => {
+        console.log(this.filterRef);
+    }
+
+    buildSearch() {
+        return (
+            <div className="search-container">
+                <input type="text"
+                    placeholder="Some attribute"
+                    ref={this.filterRef} />
+                <span onClick={this.onFilterClick}>Filtrar</span>
+            </div>
+
+        )
+    }
+
     render() {
+        if (this.state.isLoading) {
+            return (<Loader />);
+        }
+
         return (
             <div className="content" >
-                {this.props.users.map(u => <UserItem key={u.id} user={u} />)}
+                {this.buildSearch()}
 
-                {this.state.isLoading && <Loader />}
+                {this.props.users.map(u => <UserItem key={u.id} user={u} />)}
             </div>
         );
     }
