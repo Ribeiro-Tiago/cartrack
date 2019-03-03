@@ -1,10 +1,12 @@
 import React from 'react';
 
+import "./Loader.css";
+
 export default class Loader extends React.Component {
     render() {
         return (
-            <div>
-                <h1>Loading...</h1>
+            <div className="loader-container">
+                <div className="loader"></div>
             </div>
         );
     }
