@@ -1,3 +1,11 @@
+# How to run
+- clone repo
+- cd to cloned folder
+- npm install 
+- npm run
+
+# Assignment
+
 We would like you to build a simple webpage that shows / lists the current Team users.
 
 You should use the following endpoint https://jsonplaceholder.typicode.com/users  to fake data.

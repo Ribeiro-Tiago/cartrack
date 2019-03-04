@@ -16,7 +16,7 @@
 	color: #61dafb;
 	font-size: 2vh;
 	border-top-left-radius: 9px;
-	background: #20232a;
+	background: transparent;
 	border-bottom-left-radius: 9px;
 	outline: none;
 }
@@ -46,15 +46,15 @@
 }
 
 .search-container .reset-search {
-	width: 24px;
 	overflow: hidden;
-	height: 24px;
+	width: 32px;
+	height: 32px;
 	cursor: pointer;
 	background: transparent;
 	transform: rotate(-8deg);
 	position: relative;
 	z-index: 99999;
-	margin-right: 5px;
+	margin-right: 1vh;
 	border: none;
 }
 
