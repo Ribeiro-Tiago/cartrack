@@ -18,31 +18,59 @@ class UserList extends React.Component {
         this.filterRef = React.createRef();
     }
 
-    toggleFilterReset() {
-        this.setState(prev => ({
-            hasSearchParam: !prev.hasSearchParam
-        }))
+    componentDidMount() {
+        window.addEventListener("keyup", this.handleKeyPress);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("keyup", this.handleKeyPress);
+    }
+
+    handleKeyPress = (ev) => {
+        const keyCode = ev.keyCode;
+
+        if (keyCode === 27) {
+            this.resetFilter();
+        } else if (keyCode === 13) {
+            this.onFilterClick();
+        }
     }
 
     onFilterClick() {
-        const value = this.filterRef.current.value;
-
-        console.log(value);
+        const value = this.filterRef.current.value.toLowerCase();
 
         if (!value) {
+            this.resetFilter();
             return;
         }
 
         this.props.setIsLoading(true);
 
-        this.toggleFilterReset()
+        this.props.setFilteredUsers(this.props.users.filter(u => {
+            const { name, email } = u;
 
+            return name.toLowerCase().indexOf(value) !== -1 || email.toLowerCase().indexOf(value) !== -1;
+        }));
+
+        this.props.setIsLoading(false);
+
+        this.setState({
+            hasSearchParam: true
+        });
     }
 
     resetFilter() {
+        if (!this.state.hasSearchParam) {
+            return;
+        }
+
         this.props.setFilteredUsers(this.props.users);
+        this.props.setIsLoading(false);
         this.filterRef.current.value = "";
-        this.toggleFilterReset();
+
+        this.setState({
+            hasSearchParam: false
+        });
     }
 
     buildResetSearch() {
