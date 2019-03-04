@@ -61,6 +61,7 @@ class UserList extends React.Component {
 
     resetFilter() {
         if (!this.state.hasSearchParam) {
+            this.filterRef.current.value = "";
             return;
         }
 
