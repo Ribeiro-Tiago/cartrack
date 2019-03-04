@@ -47,7 +47,9 @@ export default class UserItem extends React.Component {
                 </div>
 
                 <div className="footer">
-                    <span>Call member!</span>
+                    <span className="button">Call member!</span>
+
+                    <span className="number">{this.props.user.phone}</span>
                 </div>
             </div>
         );

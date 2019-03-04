@@ -63,11 +63,35 @@
 	cursor: pointer;
 	user-select: none;
 	align-self: center;
-	transition: .2s;
+	transition: .2s ease-in-out;
+	opacity: 1;
+	height: 25px;
 }
 
-.footer span:hover {
-	background: green;
-	color: #fff;
-	transition: .2s;
+.footer .button {
+	z-index: 1;
+	width: 98px;
+}
+
+.footer .button:hover {
+	width: 100%;
+	opacity: 0;
+	transition: .2s ease-in-out;
+}
+
+.footer .button:hover+.number {
+	opacity: 1;
+	transition: .3s ease-in-out;
+	animation-delay: .3s;
+
+}
+
+.footer .number {
+	position: absolute;
+	opacity: 0;
+	transition: .3s ease-in-out;
+	overflow: hidden;
+	white-space: nowrap;
+	background-color: green;
+	color: #f7f7f7;
 }
