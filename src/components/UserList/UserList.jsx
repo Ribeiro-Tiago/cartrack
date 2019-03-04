@@ -4,22 +4,12 @@ import { connect } from 'react-redux'
 import "./UserList.css";
 import api from '../../services/Api';
 import Loader from "../Loader/Loader";
-import { SET_USER } from "../../actions/user";
+import { SET_USER, SET_FILTERED_USER } from "../../actions/user";
 import UserItem from '../UserItem/UserItem';
+import SearchInput from '../SearchInput/SearchInput';
+import { SET_IS_LOADING } from '../../actions/loading';
 
 class UserList extends React.Component {
-    filterRef;
-
-    constructor(props) {
-        super(props);
-
-        this.filterRef = React.createRef();
-
-        this.state = {
-            isLoading: true
-        };
-    }
-
     componentDidMount() {
         this.fetchUsers();
     }
@@ -28,44 +18,20 @@ class UserList extends React.Component {
         api.fetch("https://jsonplaceholder.typicode.com/users")
             .then(result => {
                 this.props.setUsers(result);
-
-                this.toggleLoading();
+                this.props.setFilteredUsers(result);
+                this.props.setIsLoading(false);
             })
             .catch(err => console.log(err));
     }
 
-    toggleLoading = () => {
-        this.setState(prevState => ({
-            isLoading: !prevState.isLoading
-        }));
-    }
-
-    onFilterClick = () => {
-        console.log(this.filterRef);
-    }
-
-    buildSearch() {
-        return (
-            <div className="search-container">
-                <input type="text"
-                    placeholder="Some attribute"
-                    ref={this.filterRef} />
-                <span onClick={this.onFilterClick}>Filtrar</span>
-            </div>
-
-        )
-    }
-
     render() {
-        if (this.state.isLoading) {
-            return (<Loader />);
-        }
-
         return (
             <div className="content" >
-                {this.buildSearch()}
+                <SearchInput />
 
-                {this.props.users.map(u => <UserItem key={u.id} user={u} />)}
+                {this.props.isLoading && <Loader />}
+
+                {!this.props.isLoading && this.props.filteredUsers.map(u => <UserItem key={u.id} user={u} />)}
             </div>
         );
     }
@@ -73,9 +39,13 @@ class UserList extends React.Component {
 
 export default connect(
     (state) => ({
-        users: state.user.users
+        users: state.user.users,
+        filteredUsers: state.user.filteredUsers,
+        isLoading: state.load.isLoading
     }),
     (dispatch) => ({
-        setUsers: (users) => dispatch({ type: SET_USER, users })
+        setUsers: (users) => dispatch({ type: SET_USER, users }),
+        setFilteredUsers: (filteredUsers) => dispatch({ type: SET_FILTERED_USER, filteredUsers }),
+        setIsLoading: (isLoading) => dispatch({ type: SET_IS_LOADING, isLoading })
     })
 )(UserList);

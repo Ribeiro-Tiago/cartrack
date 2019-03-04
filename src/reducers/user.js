@@ -1,9 +1,11 @@
 import {
-	SET_USER
+	SET_USER,
+	SET_FILTERED_USER
 } from '../actions/user';
 
 const initState = {
-	users: []
+	users: [],
+	filteredUsers: []
 }
 
 export default (state = initState, action) => {
@@ -11,6 +13,11 @@ export default (state = initState, action) => {
 		return {
 			...state,
 			users: action.users
+		};
+	} else if (action.type === SET_FILTERED_USER) {
+		return {
+			...state,
+			filteredUsers: action.filteredUsers
 		};
 	}
 

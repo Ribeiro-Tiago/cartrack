@@ -2,12 +2,12 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 2vh 0;
+	margin-top: 5vh;
 }
 
 .loader-container .loader {
 	border-radius: 50%;
-	border-top: 3px solid #f3f3f3;
+	border-top: 3px solid #61dafb;
 	width: 32px;
 	height: 32px;
 	-webkit-animation: spin .5s linear infinite;
